@@ -18,10 +18,19 @@ const getProductById = async (productId: string) => {
 };
 
 const updateProductById = async (productId: string, payload: IProduct) => {
-  const updatedProduct = ProductModel.findByIdAndUpdate(productId, payload, {
-    new: true,
-  });
+  const updatedProduct = await ProductModel.findByIdAndUpdate(
+    productId,
+    payload,
+    {
+      new: true,
+    }
+  );
   return updatedProduct;
+};
+
+const deleteProductById = async (productId: string) => {
+  const result = await ProductModel.findByIdAndDelete(productId);
+  return result;
 };
 
 export const ProductServices = {
@@ -29,4 +38,5 @@ export const ProductServices = {
   getProducts,
   getProductById,
   updateProductById,
+  deleteProductById,
 };
