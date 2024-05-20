@@ -22,6 +22,45 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getProducts = async (req: Request, res: Response) => {
+  try {
+    const products = await ProductServices.getProducts();
+
+    res.status(200).json({
+      success: true,
+      message: "Products fetched successfully!",
+      data: products,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
+const getProductById = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const product = await ProductServices.getProductById(productId);
+
+    res.status(200).json({
+      success: true,
+      message: "Product fetched successfully!",
+      data: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProduct,
+  getProducts,
+  getProductById,
 };
