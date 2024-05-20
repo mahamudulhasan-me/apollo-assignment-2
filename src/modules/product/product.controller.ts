@@ -59,8 +59,35 @@ const getProductById = async (req: Request, res: Response) => {
   }
 };
 
+const updateProductById = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const productData = req.body;
+
+    const validDataForUpdate = ZodProductValidationSchema.parse(productData);
+
+    const updatedProduct = await ProductServices.updateProductById(
+      productId,
+      validDataForUpdate
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully!",
+      data: updateProductById,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProduct,
   getProducts,
   getProductById,
+  updateProductById,
 };
