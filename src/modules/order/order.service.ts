@@ -3,6 +3,7 @@ import { OrderModel } from "./order.model";
 
 const createOrder = async (payload: IOrder) => {
   const createdOrder = await OrderModel.create(payload);
+
   return createdOrder;
 };
 

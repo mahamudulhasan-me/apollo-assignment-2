@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { ProductModel } from "../product/product.model";
 import { IOrder } from "./order.interface";
 
 const OrderSchema = new Schema<IOrder>({
@@ -22,6 +23,23 @@ const OrderSchema = new Schema<IOrder>({
     required: true,
     message: "Quantity is required",
   },
+});
+OrderSchema.pre("save", async function (next) {
+  const productId = this.productId;
+  const product = await ProductModel.findById(productId);
+
+  // Perform null and undefined checks before accessing nested properties
+  if (product?.inventory && product?.inventory.quantity !== undefined) {
+    product.inventory.quantity -= this.quantity;
+    product.inventory.inStock = product.inventory.quantity > 0;
+
+    // Save the updated product
+    await product.save();
+  } else {
+    throw new Error("Invalid product inventory");
+  }
+
+  next();
 });
 
 export const OrderModel = model<IOrder>("Order", OrderSchema);
