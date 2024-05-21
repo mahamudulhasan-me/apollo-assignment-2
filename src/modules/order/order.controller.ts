@@ -33,12 +33,12 @@ const createOrder = async (req: Request, res: Response) => {
       message: "Order created successfully!",
       data: createdOrder,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating order:", error);
     return res.status(500).json({
       success: false,
       message: "Something went wrong!",
-      error: error.message,
+      error: (error as Error).message,
     });
   }
 };
