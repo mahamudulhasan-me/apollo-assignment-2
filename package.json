@@ -1,12 +1,13 @@
 {
   "name": "apollo-assignment-2",
   "author": "Mahamudul Hasan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "start": "node ./dist/server.js",
+    "prod": "node ./dist/server.js",
     "lint": "npx eslint .",
     "build": "tsc",
     "lint:fix": "npx eslint . --fix",
