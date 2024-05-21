@@ -7,9 +7,28 @@ const createProduct = async (payload: IProduct) => {
   return result;
 };
 
-const getProducts = async () => {
-  const products = await ProductModel.find();
-  return products;
+const getProducts = async (searchTerm: string) => {
+  let result;
+
+  if (searchTerm) {
+    const regex = new RegExp(searchTerm, "i");
+    result = await ProductModel.find({
+      $or: [{ name: regex }, { description: regex }, { tags: regex }],
+    });
+
+    // result = await ProductModel.find(
+    //   {
+    //     $text: { $search: searchTerm },
+    //   },
+    //   {
+    //     score: { $meta: "textScore" },
+    //   }
+    // ).sort({ score: { $meta: "textScore" } });
+  } else {
+    result = await ProductModel.find();
+  }
+
+  return result;
 };
 
 const getProductById = async (productId: string) => {

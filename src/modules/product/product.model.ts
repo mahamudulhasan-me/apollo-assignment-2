@@ -18,7 +18,6 @@ const InventorySchema = new Schema<IInventory>({
   quantity: {
     type: Number,
     required: true,
-
     message: "Product quantity is required",
   },
   inStock: {
@@ -64,6 +63,11 @@ const ProductSchema = new Schema<IProduct>({
     required: true,
     message: "Product inventory is required",
   },
+});
+
+ProductSchema.index({
+  name: "text",
+  tags: "text",
 });
 
 export const ProductModel = model<IProduct>("Product", ProductSchema);
