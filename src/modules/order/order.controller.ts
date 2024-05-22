@@ -18,7 +18,10 @@ const createOrder = async (req: Request, res: Response) => {
       });
     }
 
-    if (!product.inventory.inStock) {
+    if (
+      !product.inventory.inStock ||
+      validOrder.quantity > product.inventory.quantity
+    ) {
       return res.status(400).json({
         success: false,
         message: "Insufficient quantity available in inventory",

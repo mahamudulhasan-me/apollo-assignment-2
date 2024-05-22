@@ -28,7 +28,8 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 message: "Product not found!",
             });
         }
-        if (!product.inventory.inStock) {
+        if (!product.inventory.inStock ||
+            validOrder.quantity > product.inventory.quantity) {
             return res.status(400).json({
                 success: false,
                 message: "Insufficient quantity available in inventory",
