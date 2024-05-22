@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { Request, Response } from "express";
 import { OrderRouters } from "./modules/order/order.route";
 import { ProductRouters } from "./modules/product/product.route";
@@ -5,6 +6,7 @@ import { ProductRouters } from "./modules/product/product.route";
 const app = express();
 // parsers
 app.use(express.json());
+app.use(cors());
 
 // routers
 app.use("/api/products", ProductRouters);
