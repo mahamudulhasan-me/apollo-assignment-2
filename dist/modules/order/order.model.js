@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrderModel = void 0;
 const mongoose_1 = require("mongoose");
 const product_model_1 = require("../product/product.model");
 const OrderSchema = new mongoose_1.Schema({
@@ -50,4 +51,4 @@ OrderSchema.pre("save", function (next) {
         next();
     });
 });
-exports.OrderModel = mongoose_1.model("Order", OrderSchema);
+exports.OrderModel = (0, mongoose_1.model)("Order", OrderSchema);

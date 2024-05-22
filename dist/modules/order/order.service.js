@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrderServices = void 0;
 const order_model_1 = require("./order.model");
 const createOrder = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const createdOrder = yield order_model_1.OrderModel.create(payload);

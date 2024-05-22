@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductControllers = void 0;
 const zod_1 = require("zod");
 const product_service_1 = require("./product.service");
 const product_validation_1 = __importDefault(require("./product.validation"));
@@ -105,7 +106,7 @@ const updateProductById = (req, res) => __awaiter(void 0, void 0, void 0, functi
         }
         // Update the product
         const updatedProduct = yield product_service_1.ProductServices.updateProductById(productId, validDataForUpdate);
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Product updated successfully!",
             data: updatedProduct,

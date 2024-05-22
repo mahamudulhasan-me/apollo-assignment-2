@@ -107,7 +107,7 @@ const updateProductById = async (req: Request, res: Response) => {
       validDataForUpdate
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Product updated successfully!",
       data: updatedProduct,
