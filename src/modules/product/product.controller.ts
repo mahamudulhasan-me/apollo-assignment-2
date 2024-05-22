@@ -152,9 +152,6 @@ const deleteProductById = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: unknown) {
-    // Log the error for debugging
-    console.error("Error deleting product:", error);
-
     // Handle the error
     res.status(500).json({
       success: false,

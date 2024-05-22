@@ -34,7 +34,6 @@ const createOrder = async (req: Request, res: Response) => {
       data: createdOrder,
     });
   } catch (error: unknown) {
-    console.error("Error creating order:", error);
     return res.status(500).json({
       success: false,
       message: "Something went wrong!",
